@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>制作実績 | Works</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:         #fffaf6;
+    --bg2:        #fff4ec;
+    --orange:     #f08040;
+    --orange-lt:  #f5a570;
+    --orange-pale:#fde8d8;
+    --orange-xlt: #fff0e6;
+    --text:       #2e2318;
+    --text-mid:   #7a5a40;
+    --text-lt:    #b89070;
+    --border:     #f0d8c4;
+    --white:      #ffffff;
+    --shadow:     rgba(200, 100, 30, 0.10);
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* ======== HERO ======== */
+  .hero {
+    background: linear-gradient(145deg, #fff6ef 0%, #ffe8d2 60%, #ffd8b8 100%);
+    padding: 80px 24px 64px;
+    text-align: center;
+    border-bottom: 2px solid var(--orange-pale);
+  }
+
+  .hero-badge {
+    display: inline-block;
+    background: var(--orange);
+    color: #fff;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    padding: 5px 18px;
+    border-radius: 20px;
+    margin-bottom: 22px;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 0.1s;
+  }
+
+  .hero h1 {
+    font-size: clamp(2rem, 6vw, 3.4rem);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--text);
+    line-height: 1.2;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 0.25s;
+  }
+
+  .hero h1 span { color: var(--orange); }
+
+  .hero-sub {
+    margin-top: 16px;
+    font-size: 0.88rem;
+    font-weight: 300;
+    color: var(--text-mid);
+    letter-spacing: 0.12em;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 0.4s;
+  }
+
+  .hero-dots {
+    margin-top: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 0.55s;
+  }
+
+  .hero-dots span {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--orange-lt);
+  }
+  .hero-dots span:nth-child(2) { background: var(--orange); transform: scale(1.3); }
+
+  /* ======== LAYOUT ======== */
+  .container {
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 72px 24px;
+  }
+
+  /* ======== SECTION HEADER ======== */
+  .sec-head {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+
+  .sec-icon {
+    width: 44px; height: 44px;
+    border-radius: 10px;
+    background: var(--orange);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .sec-icon svg {
+    width: 22px; height: 22px;
+    fill: none;
+    stroke: #fff;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .sec-en {
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    color: var(--orange);
+    display: block;
+    margin-bottom: 3px;
+  }
+
+  .sec-title {
+    font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: var(--text);
+  }
+
+  /* ======== HP WORKS GRID ======== */
+  .works-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+    gap: 24px;
+  }
+
+  .work-card {
+    background: var(--white);
+    border-radius: 14px;
+    border: 1.5px solid var(--border);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .work-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 48px var(--shadow);
+    border-color: var(--orange-lt);
+  }
+
+  /* Card preview image */
+  .card-preview {
+    width: 100%;
+    aspect-ratio: 16/9;
+    position: relative;
+    overflow: hidden;
+    background: var(--orange-xlt);
+  }
+
+  .card-preview img {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    transition: transform 0.5s ease;
+  }
+
+  .work-card:hover .card-preview img {
+    transform: scale(1.04);
+  }
+
+  .card-num {
+    position: absolute;
+    top: 10px; left: 10px;
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: var(--orange);
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    z-index: 2;
+  }
+
+  .card-body {
+    padding: 18px 20px 12px;
+    flex: 1;
+  }
+
+  .card-cat {
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    color: var(--orange);
+    margin-bottom: 7px;
+  }
+
+  .card-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    line-height: 1.55;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+
+  .card-desc {
+    font-size: 0.78rem;
+    font-weight: 300;
+    color: var(--text-mid);
+    line-height: 1.75;
+  }
+
+  .card-link {
+    margin: 12px 20px 18px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--orange);
+    letter-spacing: 0.08em;
+    transition: gap 0.2s;
+  }
+
+  .work-card:hover .card-link { gap: 10px; }
+
+  .card-link svg {
+    width: 14px; height: 14px;
+    fill: none;
+    stroke: var(--orange);
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  /* ======== DIVIDER ======== */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
+    max-width: 1160px;
+    margin: 0 auto;
+  }
+
+  /* ======== VIDEO SECTION ======== */
+  .video-bg { background: linear-gradient(160deg, #fff4ec 0%, #ffe8d6 100%); }
+
+  .video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px;
+  }
+
+  .video-card {
+    background: var(--white);
+    border-radius: 14px;
+    border: 1.5px solid var(--border);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .video-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 14px 40px var(--shadow);
+  }
+
+  .video-wrap {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: #1a1410;
+    position: relative;
+  }
+
+  .video-wrap iframe {
+    width: 100%; height: 100%;
+    border: none; display: block;
+  }
+
+  .video-placeholder {
+    width: 100%; height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: linear-gradient(135deg, #f5e0d0 0%, #ead0ba 100%);
+  }
+
+  .video-placeholder svg {
+    width: 44px; height: 44px;
+    fill: none;
+    stroke: var(--orange-lt);
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .video-placeholder p {
+    font-size: 0.72rem;
+    font-weight: 500;
+    color: var(--orange-lt);
+    letter-spacing: 0.15em;
+  }
+
+  .video-info { padding: 14px 18px 18px; }
+
+  .video-cat {
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    color: var(--orange);
+    margin-bottom: 5px;
+  }
+
+  .video-title {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: 0.04em;
+    line-height: 1.5;
+  }
+
+  /* ======== ANIMATIONS ======== */
+  @keyframes fadeUp {
+    from { opacity:0; transform:translateY(18px); }
+    to   { opacity:1; transform:translateY(0); }
+  }
+
+  .reveal { opacity:0; transform:translateY(22px); transition: opacity 0.65s ease, transform 0.65s ease; }
+  .reveal.on { opacity:1; transform:translateY(0); }
+
+  .stagger > * { opacity:0; transform:translateY(20px); transition: opacity 0.55s ease, transform 0.55s ease; }
+  .stagger.on > *:nth-child(1) { opacity:1; transform:none; transition-delay:0.04s; }
+  .stagger.on > *:nth-child(2) { opacity:1; transform:none; transition-delay:0.11s; }
+  .stagger.on > *:nth-child(3) { opacity:1; transform:none; transition-delay:0.18s; }
+  .stagger.on > *:nth-child(4) { opacity:1; transform:none; transition-delay:0.25s; }
+  .stagger.on > *:nth-child(5) { opacity:1; transform:none; transition-delay:0.32s; }
+
+  /* ======== FOOTER ======== */
+  footer {
+    text-align: center;
+    padding: 36px 24px;
+    font-size: 0.75rem;
+    font-weight: 300;
+    color: var(--text-lt);
+    letter-spacing: 0.1em;
+    border-top: 1px solid var(--border);
+  }
+
+  /* ======== RESPONSIVE ======== */
+  @media (max-width: 600px) {
+    .works-grid, .video-grid { grid-template-columns: 1fr; }
+    .container { padding: 52px 16px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-badge">PORTFOLIO &amp; WORKS</div>
+  <h1>制作<span>実績</span></h1>
+  <p class="hero-sub">Website &amp; Video Production</p>
+  <div class="hero-dots"><span></span><span></span><span></span></div>
+</header>
+
+<!-- ===== HP SECTION ===== -->
+<div class="container">
+  <div class="sec-head reveal">
+    <div class="sec-icon">
+      <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    </div>
+    <div>
+      <span class="sec-en">WEBSITE CREATION</span>
+      <h2 class="sec-title">ホームページ制作事例</h2>
+    </div>
+  </div>
+
+  <div class="works-grid stagger">
+
+    <a href="https://k273ogakita.github.io/sample-seitan-in/" target="_blank" rel="noopener" class="work-card">
+      <div class="card-preview">
+        <img src="thumb_01.png" alt="整体院サイトのスクリーンショット">
+        <span class="card-num">1</span>
+      </div>
+      <div class="card-body">
+        <p class="card-cat">SEITAI CLINIC</p>
+        <h3 class="card-title">信頼感と温かみが伝わる整体院HP</h3>
+        <p class="card-desc">来院前から安心感が持てるよう、温かみのある配色と丁寧なコピーで信頼感を演出しました。</p>
+      </div>
+      <span class="card-link">サイトを見る <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+    </a>
+
+    <a href="https://k273ogakita.github.io/English-sample/" target="_blank" rel="noopener" class="work-card">
+      <div class="card-preview">
+        <img src="thumb_02.png" alt="英会話教室サイトのスクリーンショット">
+        <span class="card-num">2</span>
+      </div>
+      <div class="card-body">
+        <p class="card-cat">ENGLISH SCHOOL</p>
+        <h3 class="card-title">お子さんがワクワクする英会話教室HP</h3>
+        <p class="card-desc">親御さんへの安心感とお子さんへの楽しさを両立。明るく元気な雰囲気が伝わるデザインです。</p>
+      </div>
+      <span class="card-link">サイトを見る <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+    </a>
+
+    <a href="https://k273ogakita.github.io/IKEBANA-lesson-sample/" target="_blank" rel="noopener" class="work-card">
+      <div class="card-preview">
+        <img src="thumb_03.png" alt="華道教室サイトのスクリーンショット">
+        <span class="card-num">3</span>
+      </div>
+      <div class="card-body">
+        <p class="card-cat">FLOWER ARRANGEMENT</p>
+        <h3 class="card-title">大人の洗練した雰囲気の華道教室HP</h3>
+        <p class="card-desc">日本の美意識を大切に、余白と落ち着いた色調で上品な世界観を表現しました。</p>
+      </div>
+      <span class="card-link">サイトを見る <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+    </a>
+
+    <a href="https://nark-movie.com" target="_blank" rel="noopener" class="work-card">
+      <div class="card-preview">
+        <img src="thumb_04.png" alt="個人事業主サイトのスクリーンショット">
+        <span class="card-num">4</span>
+      </div>
+      <div class="card-body">
+        <p class="card-cat">FREELANCE</p>
+        <h3 class="card-title">清潔感と信頼感でターゲットに響くHP</h3>
+        <p class="card-desc">ターゲット層を明確に定め、一目で信頼感が伝わる清潔感のあるデザインです。</p>
+      </div>
+      <span class="card-link">サイトを見る <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+    </a>
+
+    <a href="https://k273ogakita.github.io/nark-visual-media/" target="_blank" rel="noopener" class="work-card">
+      <div class="card-preview">
+        <img src="thumb_05.png" alt="動画クリエイターサイトのスクリーンショット">
+        <span class="card-num">5</span>
+      </div>
+      <div class="card-body">
+        <p class="card-cat">VIDEO CREATOR</p>
+        <h3 class="card-title">オレンジ × 黒のスタイリッシュなHP</h3>
+        <p class="card-desc">クリエイターらしい個性とプロ意識が伝わる、インパクトのあるモノクロ×オレンジのデザインです。</p>
+      </div>
+      <span class="card-link">サイトを見る <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+    </a>
+
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ===== VIDEO SECTION ===== -->
+<div class="video-bg">
+  <div class="container">
+    <div class="sec-head reveal">
+      <div class="sec-icon">
+        <svg viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+      </div>
+      <div>
+        <span class="sec-en">VIDEO PRODUCTION</span>
+        <h2 class="sec-title">動画制作事例</h2>
+      </div>
+    </div>
+
+    <div class="video-grid stagger">
+
+      <div class="video-card">
+        <div class="video-wrap">
+          <iframe src="https://www.youtube.com/embed/9nWUUzNGlZY"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="video-info">
+          <p class="video-cat">EVENT</p>
+          <h3 class="video-title">イベント予告動画</h3>
+        </div>
+      </div>
+
+      <div class="video-card">
+        <div class="video-wrap">
+          <iframe src="https://www.youtube.com/embed/g_yyK4v1ElI"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="video-info">
+          <p class="video-cat">ARCHIVE</p>
+          <h3 class="video-title">記録動画</h3>
+        </div>
+      </div>
+
+      <div class="video-card">
+        <div class="video-wrap">
+          <iframe src="https://www.youtube.com/embed/z7zC6fLubLE"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="video-info">
+          <p class="video-cat">HOSPITAL</p>
+          <h3 class="video-title">病院紹介動画</h3>
+        </div>
+      </div>
+
+      <div class="video-card">
+        <div class="video-wrap">
+          <div class="video-placeholder">
+            <svg viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+            <p>COMING SOON</p>
+          </div>
+        </div>
+        <div class="video-info">
+          <p class="video-cat">CONSTRUCTION</p>
+          <h3 class="video-title">工務店様紹介動画</h3>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>© 2025 Your Name / Studio. All rights reserved.</p>
+</footer>
+
+<script>
+  const io = new IntersectionObserver(
+    (entries) => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('on'); }),
+    { threshold: 0.1 }
+  );
+  document.querySelectorAll('.reveal, .stagger').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
